@@ -1,0 +1,206 @@
+---
+title: "Plants in dirty water sources grew better than plants in distilled water"
+subtitle: " ... not always"
+author: John Woodward 
+institute: "UK Centre for Ecology & Hydrology"
+date: "`r Sys.Date()`"
+output:
+  xaringan::moon_reader:
+    css: [default, metropolis, metropolis-fonts, ukceh_style.css]
+    nature:
+      ratio: 4:3 # choose 16:9 or 4:3
+      highlightStyle: github  
+      slideNumberFormat: "%current%/%total%"
+      beforeInit: "macros.js"
+
+---
+class: middle center
+<!-- 
+  This first part setup your R environment and use [xaringan] and [xaringanExtra] to build the slide and 
+  add progress bar and UKCEH logo on each slide, except the title slide. Because xaringan does not use 
+  Pandoc, we use [RefmanageR] to handle citation and reference from a .bib file.
+  
+  Colors and other CSS specifications used in this template are in the ukceh_style.css that 
+  can be adapted or omitted from the css: listed in the YAML header.
+  
+  With xaringan, slide title are indicated with # and closed with --- 
+  
+  This template include a marcros.js file with only one macro so far for scaling images.
+  the macro scale is called by adding :scale xx% in square bracket of your image
+  (e.g., ![:scale 50%](UKCEH-Logo_Long_Positive_RGB.png) see below).
+  
+  
+-->
+
+```{r setup, echo = FALSE, message=FALSE, warning=FALSE}
+ if(!requireNamespace("remotes")) install.packages("remotes")
+ if(!requireNamespace("xaringan")) remotes::install_github('yihui/xaringan')
+ if(!requireNamespace("xaringanExtra")) remotes::install_github("gadenbuie/xaringanExtra")
+ if(!requireNamespace("RefManageR")) remotes::install_github("ropensci/RefManageR")
+
+ library(xaringan)
+ library(xaringanExtra)
+ library(RefManageR)
+
+
+
+```
+
+```{r progressbar, echo = FALSE}
+xaringanExtra::use_progress_bar(color = "rgb(75, 148, 164)", 
+                                location = "bottom")
+```
+
+```{r CEH_logo, echo=FALSE} 
+xaringanExtra::use_logo(image_url = "UKCEH_MasterLogo_Long_Positive_CMYK.svg", # "UKCEH-Logo_Long_Positive_RGB.png"
+                        width = "50mm",
+                        height = "12.5mm",
+                        position = xaringanExtra::css_position(top = "31em", 
+                                                               right = "35em") )
+
+# For wide slide: right = "49em"
+# For narrow slide: right = "35em"
+```
+
+```{r citation_setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+RefManageR::BibOptions(check.entries = FALSE, 
+                       bib.style = "authoryear", 
+                       style = "markdown",
+                       dashed = TRUE)
+
+file.name <- "mybib.bib"
+
+bib <- RefManageR::ReadBib(file.name)
+```
+
+
+This template use the **xaringan** R package that can be installed from [Github](https://github.com/yihui/xaringan);
+instruction can be found in the WIKI of the Github repository
+[xaringan demo](https://slides.yihui.org/xaringan/#1).
+
+---
+
+# Image scaling macro
+
+You can add an image within a slide and scale the outcome using the macro `scale` define
+in the macros.js file.
+
+The expression `![:scale 50%](UKCEH-Logo_Long_Positive_RGB.png)` will include a logo scaled at 50%
+
+
+![:scale 50%](UKCEH_MasterLogo_Long_Positive_CMYK.svg)
+
+
+---
+
+
+# citations
+
+Because **xaringan** does not use Pandoc to build the output, we need to use different
+a citation workflow. Thankfully, the RefmanageR package can help with formatting references
+into a Markdown format form a bibtex source.
+
+in your slide, you can insert citation using the bibtex key using the function `Citet` for text citation
+or `Citep` for citation within parentheses. More can be found in the RefmanageR documentation.
+
+
+```{r citation_text, eval=FALSE}
+`r Citet(bib, "loreau_immigration_1999")`
+```
+
+produces: `r Citet(bib, "loreau_immigration_1999")` 
+
+```{r citation_parentheses, eval=FALSE}
+`r Citep(bib, "kriegerMoreOneWay2021")`
+```
+
+produces: `r Citep(bib, "kriegerMoreOneWay2021")`
+
+---
+class: inverse, middle, center
+
+<!-- you can include a section break with the class: inverse and a section title -->
+
+# Header of section slide
+
+---
+
+# Two columns
+
+You can use `.pull-left[ ... ]` and `.pull-right[ ... ]` to generate two column 
+with the content contained within the square brackets.
+
+.pull-left[
+
+ You can include code
+ 
+```{r eval=FALSE, tidy=FALSE}
+   a <- 1:10
+   b <- a^2
+   plot(a, b, main = "b function of a" )
+```
+ 
+  Equation or some some math: $\sigma = nq\mu$
+  
+  inline using `$` or in block using `$$`
+ 
+  $$\sigma = nq\mu$$
+ 
+]
+
+.pull-right[
+
+  
+```{r eval=TRUE, echo=FALSE, tidy=FALSE}
+   a <- 1:10
+   b <- a^2
+   plot(a, b, main = "b function of a" )
+```
+
+]
+
+---
+# Two columns
+
+You can also use `.left-column[ ... ]` and `.right-column[ ... ]` to generate two columns 
+with the left being 20% and the right 75%.
+
+
+.left-column[ 
+#### List
+
+* a first thing
+* a second thing
+* a third
+]
+
+ 
+.right-column[
+  
+```{r eval=TRUE, echo=FALSE, tidy=FALSE}
+library(kableExtra)
+dt <- mtcars[1:5, 1:6]
+
+kbl(dt, caption = "Recreating booktabs style table") %>%
+kable_paper("hover")
+
+```
+]
+
+---
+
+# Reference
+
+Using the RefmanageR package, you can print the references used in your
+presentation.
+
+```{r, results='asis', echo=FALSE, warning=FALSE, message=FALSE}
+PrintBibliography(bib)
+```
+
+---
+class: inverse, middle, center
+<!-- Again you can use the inverse class to mark the end of the presentation -->
+
+# Thank You!
