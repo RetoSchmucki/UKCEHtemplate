@@ -1,9 +1,9 @@
 Package: UKCEHtemplate
 Type: Package
-Date: 24-09-2021
+Date: 24-09-2023
 Title: A template for Xanringan presentation with UKCEH colors and metropolis theme.
-Version: 0.1.0
-Author: Who wrote it
+Version: 0.2.0
+Author: "Reto Schmucki - retoschm[at]ceh.ac.uk 
 Authors@R:
 	c(person(given = "Reto",
 					family ="Schmucki",
