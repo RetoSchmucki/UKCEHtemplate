@@ -56,8 +56,10 @@ xaringanExtra::use_logo(image_url = "UKCEH_MasterLogo_Long_Positive_CMYK.svg", #
                         width = "50mm",
                         height = "12.5mm",
                         position = xaringanExtra::css_position(top = "31em", 
-                                                               right = "49em") )
-# For wide slide: right = "40em"
+                                                               right = "35em") )
+
+# For wide slide: right = "49em"
+# For narrow slide: right = "35em"
 
 ```
 
